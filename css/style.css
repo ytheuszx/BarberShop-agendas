@@ -17,6 +17,8 @@
     --destaque: #d48a3a;
     --dia-atual: #426b44;
     --sombra: 0 2px 5px rgba(0, 0, 0, 0.3);
+    --texto-escuro: #333333;
+    --texto-claro: #f5f5f5;
 }
 
 /* Reset e Estilos Básicos */
@@ -165,6 +167,7 @@ button {
     height: 300px;
     overflow-y: auto;
     padding: 15px;
+    background-color: var(--fundo-escuro);
 }
 
 .message {
@@ -173,18 +176,25 @@ button {
     max-width: 80%;
     border-radius: 8px;
     position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.message.bot {
+.message p {
+    margin: 0;
+    word-wrap: break-word;
+}
+
+.message.barbeiro {
     background-color: var(--cinza-claro);
+    color: var(--texto-escuro);
     border-bottom-left-radius: 0;
     float: left;
     clear: both;
 }
 
-.message.user {
+.message.cliente {
     background-color: var(--dourado);
-    color: var(--branco);
+    color: var(--texto-escuro);
     border-bottom-right-radius: 0;
     float: right;
     clear: both;
@@ -193,7 +203,8 @@ button {
 .chat-input {
     display: flex;
     padding: 15px;
-    border-top: 1px solid var(--cinza-claro);
+    border-top: 1px solid var(--cinza-escuro);
+    background-color: var(--fundo-conteudo);
 }
 
 .chat-input input {
@@ -202,6 +213,8 @@ button {
     border: 1px solid var(--cinza-claro);
     border-radius: 4px 0 0 4px;
     outline: none;
+    background-color: var(--branco);
+    color: var(--texto-escuro);
 }
 
 .chat-input button {
@@ -214,7 +227,7 @@ button {
 }
 
 .chat-input button:hover {
-    background-color: #8a5a45;
+    background-color: var(--marrom-claro);
 }
 
 /* Seção de Agendamento */
@@ -388,10 +401,13 @@ button {
     margin-bottom: 10px;
     cursor: pointer;
     transition: all 0.3s;
+    background-color: var(--fundo-conteudo);
+    color: var(--texto-claro);
 }
 
 .servico-item:hover {
-    background-color: var(--cinza-claro);
+    background-color: var(--dourado);
+    color: var(--texto-escuro);
 }
 
 .servico-item.selecionado {
@@ -610,7 +626,7 @@ button {
 .btn-nav {
     padding: 5px 10px;
     background-color: var(--marrom);
-    color: var(--cinza-claro);
+    color: var(--texto-claro);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -618,8 +634,7 @@ button {
 }
 
 .btn-nav:hover {
-    background-color: var(--dourado);
-    color: var(--preto);
+    background-color: var(--marrom-claro);
 }
 
 .agenda-lista {
@@ -634,11 +649,12 @@ button {
     border-radius: 4px;
     margin-bottom: 10px;
     transition: all 0.3s;
-    background-color: var(--cinza-escuro);
+    background-color: var(--fundo-conteudo);
+    color: var(--texto-claro);
 }
 
 .agenda-item:hover {
-    background-color: var(--marrom);
+    background-color: var(--cinza-escuro);
 }
 
 .agenda-item.atual {
@@ -764,14 +780,15 @@ button {
     font-size: 16px;
 }
 
-.form-group input, .form-group textarea, .form-group select {
-    background-color: var(--cinza-escuro);
-    border: 1px solid var(--cinza);
-    color: var(--cinza-claro);
-    padding: 12px;
-    width: 100%;
+.form-group input, .form-group textarea, .form-group select, .consulta-form input {
+    background-color: var(--branco);
+    color: var(--texto-escuro);
+    border: 1px solid var(--cinza-claro);
     border-radius: 4px;
-    font-size: 15px;
+    padding: 10px;
+    width: 100%;
+    font-size: 14px;
+    transition: border 0.3s;
 }
 
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
@@ -859,10 +876,10 @@ button {
 
 /* Meus Agendamentos - Área do Cliente */
 .consulta-container {
-    background-color: var(--branco);
+    background-color: var(--fundo-conteudo);
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--sombra);
     margin: 20px 0;
     border-left: 4px solid var(--marrom);
 }
@@ -940,8 +957,9 @@ button {
     border: 1px solid var(--cinza-claro);
     border-radius: 5px;
     margin-bottom: 15px;
-    background-color: #f9f9f9;
+    background-color: var(--fundo-conteudo);
     transition: transform 0.2s, box-shadow 0.2s;
+    color: var(--texto-claro);
 }
 
 .agendamento-cliente-item:hover {
@@ -1216,14 +1234,13 @@ button {
     transition: all 0.2s;
     border: 1px solid var(--cinza);
     position: relative;
-    background-color: var(--cinza-escuro);
-    color: var(--cinza-claro);
+    background-color: var(--fundo-conteudo);
+    color: var(--texto-claro);
 }
 
 .calendario-dias .dia:hover:not(.dia-passado):not(.outro-mes) {
-    background-color: var(--marrom-claro);
-    transform: translateY(-2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    background-color: var(--dourado);
+    color: var(--texto-escuro);
 }
 
 .calendario-dias .dia.hoje {
@@ -1824,4 +1841,224 @@ button {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+/* Botões e elementos interativos */
+.btn-confirmar, .btn-voltar, .btn-cadastrar, 
+.btn-consulta, .btn-excluir-agenda, .btn-editar, 
+.btn-excluir, #btnConsultar, #btnContinuarData, 
+#btnContinuarHorario, #btnContinuarServico {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.btn-confirmar, #btnContinuarData, #btnContinuarHorario, #btnContinuarServico {
+    background-color: var(--verde-claro);
+    color: var(--branco);
+}
+
+.btn-confirmar:hover, #btnContinuarData:hover, #btnContinuarHorario:hover, #btnContinuarServico:hover {
+    background-color: var(--verde-escuro);
+}
+
+.btn-voltar {
+    background-color: var(--cinza);
+    color: var(--branco);
+}
+
+.btn-voltar:hover {
+    background-color: var(--cinza-escuro);
+}
+
+.btn-cadastrar, .btn-consulta {
+    background-color: var(--marrom);
+    color: var(--branco);
+}
+
+.btn-cadastrar:hover, .btn-consulta:hover {
+    background-color: var(--marrom-claro);
+}
+
+.btn-editar {
+    background-color: var(--dourado);
+    color: var(--texto-escuro);
+}
+
+.btn-editar:hover {
+    background-color: var(--dourado-escuro);
+}
+
+.btn-excluir, .btn-excluir-agenda {
+    background-color: var(--vermelho);
+    color: var(--branco);
+}
+
+.btn-excluir:hover, .btn-excluir-agenda:hover {
+    background-color: #8a3232;
+}
+
+/* Ajustes no calendário */
+.calendario-dias .dia, .calendar-day {
+    color: var(--texto-claro);
+    background-color: var(--fundo-conteudo);
+    border: 1px solid var(--cinza-escuro);
+}
+
+.calendario-dias .dia.hoje, .calendar-day.hoje {
+    background-color: var(--dia-atual);
+    color: var(--branco);
+    font-weight: bold;
+}
+
+.calendario-dias .dia.selecionado, .calendar-day.selecionado {
+    background-color: var(--dourado);
+    color: var(--texto-escuro);
+    font-weight: bold;
+}
+
+/* Seções principais */
+.site-title, .section-title, .consulta-header, 
+.barbearia-section h2, .form-titulo {
+    color: var(--dourado);
+    margin-bottom: 15px;
+}
+
+.site-title h1, .site-title p {
+    color: var(--texto-claro);
+}
+
+/* Formulários e entradas */
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--texto-claro);
+    font-weight: 500;
+}
+
+input, textarea, select {
+    background-color: var(--branco);
+    color: var(--texto-escuro);
+    border: 1px solid var(--cinza-claro);
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    font-size: 14px;
+    transition: border 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--dourado);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(193, 154, 107, 0.2);
+}
+
+/* Ajuste para os horários */
+#horariosDisponiveis {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.horario-item {
+    padding: 8px 12px;
+    background-color: var(--fundo-conteudo);
+    color: var(--texto-claro);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1px solid var(--cinza-escuro);
+}
+
+.horario-item:hover:not(.agendado) {
+    background-color: var(--dourado);
+    color: var(--texto-escuro);
+}
+
+.horario-item.selecionado {
+    background-color: var(--dourado);
+    color: var(--texto-escuro);
+    font-weight: bold;
+}
+
+.horario-item.agendado {
+    background-color: var(--cinza-escuro);
+    color: var(--cinza);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Serviços */
+#servicosDisponiveis {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.servico-item {
+    padding: 15px;
+    background-color: var(--fundo-conteudo);
+    color: var(--texto-claro);
+    border-radius: 6px;
+    border: 1px solid var(--cinza-escuro);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.servico-item:hover {
+    background-color: var(--dourado);
+    color: var(--texto-escuro);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.servico-item.selecionado {
+    background-color: var(--dourado);
+    color: var(--texto-escuro);
+    border-color: var(--dourado-escuro);
+}
+
+.servico-item h4 {
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.servico-item p {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+/* Confirmação */
+#detalhesConfirmacao {
+    background-color: var(--fundo-conteudo);
+    color: var(--texto-claro);
+    padding: 20px;
+    border-radius: 6px;
+    margin: 20px 0;
+}
+
+#detalhesConfirmacao p {
+    margin-bottom: 10px;
+}
+
+#detalhesConfirmacao strong {
+    color: var(--dourado);
+}
+
+.info-meus-agendamentos {
+    margin-top: 15px !important;
+    padding: 15px;
+    background-color: var(--cinza-escuro);
+    border-left: 4px solid var(--destaque);
+    color: var(--texto-claro);
+    font-size: 14px;
+    border-radius: 4px;
 } 

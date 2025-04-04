@@ -671,4 +671,20 @@ function novoAgendamento() {
 function irParaMeusAgendamentos() {
     // Redireciona para a página de meus agendamentos
     window.location.href = 'meus-agendamentos.html';
+}
+
+// Função para adicionar mensagem no chat
+function adicionarMensagemChat(texto, tipo) {
+    const chatMessages = document.getElementById("barbChatMessages");
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "message " + tipo;
+    
+    const messagePara = document.createElement("p");
+    messagePara.textContent = texto;
+    
+    messageDiv.appendChild(messagePara);
+    chatMessages.appendChild(messageDiv);
+    
+    // Scroll para o final do chat
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 } 
