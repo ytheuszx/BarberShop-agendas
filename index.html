@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarberShop - Agendamento</title>
+    <!-- Fonte Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Menu lateral -->
+    <div class="sidebar" id="barbSidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#" id="barbInicio">Início</a>
+        <a href="#" id="barbMeusAgendamentos">Meus Agendamentos</a>
+        <a href="#" id="barbCadastro">Cadastro da Barbearia</a>
+        <a href="#" id="barbMinhaBarbearia">Minha Barbearia</a>
+    </div>
+
+    <!-- Botão para abrir o menu -->
+    <button class="openbtn" id="barbOpenBtn" onclick="openNav()">&#9776;</button>
+
+    <!-- Conteúdo principal -->
+    <div class="main-content">
+        <!-- Título do site -->
+        <div class="site-title">
+            <h1>BarberShop <span>Agendamento</span></h1>
+            <p id="barbDataAtual"></p>
+        </div>
+
+        <!-- Seção de chat -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <i class="fas fa-comments"></i> Chat de Agendamento
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <!-- Mensagens serão adicionadas aqui via JavaScript -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Digite sua mensagem...">
+                <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+
+        <!-- Seção de agendamento -->
+        <div class="agendamento-container" id="agendamentoContainer" style="display: none;">
+            <!-- Etapa 1: Calendário -->
+            <div class="etapa-agendamento" id="etapaCalendario">
+                <h2 class="section-title">Selecione uma Data</h2>
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <div class="calendar-nav">
+                            <button id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                            <h3 id="currentMonth" class="calendar-title">Maio 2023</h3>
+                            <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <div>Dom</div>
+                        <div>Seg</div>
+                        <div>Ter</div>
+                        <div>Qua</div>
+                        <div>Qui</div>
+                        <div>Sex</div>
+                        <div>Sáb</div>
+                    </div>
+                    <div class="calendar-days" id="calendarDays">
+                        <!-- Dias serão gerados via JavaScript -->
+                    </div>
+                </div>
+                <div class="etapa-navegacao">
+                    <button id="avancarHorarios" class="btn-confirmar" disabled>Avançar para Horários</button>
+                </div>
+            </div>
+
+            <!-- Etapa 2: Horários -->
+            <div class="etapa-agendamento" id="etapaHorarios" style="display: none;">
+                <h2 class="section-title">Selecione um Horário</h2>
+                <div class="data-selecionada" id="dataSelecionada">
+                    Data selecionada: <span>01/05/2023</span>
+                </div>
+                <div class="horarios-container" id="horariosContainer">
+                    <!-- Horários serão gerados via JavaScript -->
+                </div>
+                <div class="etapa-navegacao">
+                    <button id="voltarCalendario" class="btn-voltar">Voltar para Calendário</button>
+                    <button id="avancarServicos" class="btn-confirmar" disabled>Avançar para Serviços</button>
+                </div>
+            </div>
+
+            <!-- Etapa 3: Serviços -->
+            <div class="etapa-agendamento" id="etapaServicos" style="display: none;">
+                <h2 class="section-title">Selecione um Serviço</h2>
+                <div class="horario-selecionado" id="horarioSelecionado">
+                    Horário selecionado: <span>10:00</span>
+                </div>
+                <div class="servicos-container" id="servicosContainer">
+                    <!-- Serviços serão carregados via JavaScript -->
+                </div>
+                <div class="etapa-navegacao">
+                    <button id="voltarHorarios" class="btn-voltar">Voltar para Horários</button>
+                    <button id="avancarConfirmacao" class="btn-confirmar" disabled>Avançar para Confirmação</button>
+                </div>
+            </div>
+
+            <!-- Etapa 4: Confirmação -->
+            <div class="etapa-agendamento" id="etapaConfirmacao" style="display: none;">
+                <h2 class="section-title">Confirme seu Agendamento</h2>
+                <div class="resumo-container">
+                    <div class="resumo-titulo">Resumo do Agendamento</div>
+                    <div id="resumoAgendamento">
+                        <!-- Resumo será preenchido via JavaScript -->
+                    </div>
+                </div>
+                <div class="etapa-navegacao">
+                    <button id="voltarServicos" class="btn-voltar">Voltar para Serviços</button>
+                    <button id="confirmarAgendamento" class="btn-confirmar">Confirmar Agendamento</button>
+                </div>
+            </div>
+
+            <!-- Etapa 5: Sucesso -->
+            <div class="etapa-agendamento" id="etapaSucesso" style="display: none;">
+                <div class="confirmacao-header">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Agendamento Confirmado!</h3>
+                </div>
+                <div class="confirmacao-detalhes" id="detalhesConfirmacao"></div>
+                <button class="btn-novo-agendamento" onclick="novoAgendamento()">Fazer novo agendamento</button>
+                <button class="btn-meus-agendamentos" onclick="irParaMeusAgendamentos()">Meus Agendamentos</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html> 

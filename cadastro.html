@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarberShop - Cadastro da Barbearia</title>
+    <!-- Fonte Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Menu lateral -->
+    <div class="sidebar" id="barbSidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#" id="barbInicio">Início</a>
+        <a href="#" id="barbMeusAgendamentos">Meus Agendamentos</a>
+        <a href="#" id="barbCadastro">Cadastro da Barbearia</a>
+        <a href="#" id="barbMinhaBarbearia">Minha Barbearia</a>
+    </div>
+
+    <!-- Botão para abrir o menu -->
+    <button class="openbtn" id="barbOpenBtn" onclick="openNav()">&#9776;</button>
+
+    <!-- Conteúdo principal -->
+    <div class="main-content">
+        <!-- Título do site -->
+        <div class="site-title">
+            <h1>BarberShop - Cadastro da Barbearia</h1>
+        </div>
+
+        <div class="btn-voltar-container">
+            <a href="index.html" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+        </div>
+
+        <!-- Formulário de cadastro -->
+        <div class="barbearia-container">
+            <h2 class="barbearia-titulo">Cadastre sua Barbearia</h2>
+            
+            <form id="formCadastro" class="form-cadastro">
+                <!-- Dados básicos -->
+                <div class="form-section">
+                    <h3>Dados Básicos</h3>
+                    
+                    <div class="form-group">
+                        <label for="nomeBarbearia">Nome da Barbearia *</label>
+                        <input type="text" id="nomeBarbearia" placeholder="Ex: BarberShop Estilo" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefone">Telefone *</label>
+                            <input type="tel" id="telefone" placeholder="(00) 00000-0000" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" placeholder="exemplo@email.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="endereco">Endereço *</label>
+                        <input type="text" id="endereco" placeholder="Rua, número, bairro, cidade" required>
+                    </div>
+                </div>
+                
+                <!-- Horário de funcionamento -->
+                <div class="form-section">
+                    <h3>Horário de Funcionamento</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="horaInicio">Horário de Abertura *</label>
+                            <input type="time" id="horaInicio" value="08:00" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="horaFim">Horário de Fechamento *</label>
+                            <input type="time" id="horaFim" value="18:00" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Dias de Funcionamento *</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="diasFuncionamento" value="segunda" checked> Segunda-feira
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="diasFuncionamento" value="terca" checked> Terça-feira
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="diasFuncionamento" value="quarta" checked> Quarta-feira
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="diasFuncionamento" value="quinta" checked> Quinta-feira
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="diasFuncionamento" value="sexta" checked> Sexta-feira
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="diasFuncionamento" value="sabado" checked> Sábado
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="diasFuncionamento" value="domingo"> Domingo
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Intervalo entre agendamentos -->
+                <div class="form-section">
+                    <h3>Configurações de Agendamento</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="intervaloAgendamento">Intervalo entre Agendamentos (minutos) *</label>
+                            <select id="intervaloAgendamento" required>
+                                <option value="15">15 minutos</option>
+                                <option value="30" selected>30 minutos</option>
+                                <option value="45">45 minutos</option>
+                                <option value="60">60 minutos</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="antecedenciaMinima">Antecedência Mínima (horas)</label>
+                            <select id="antecedenciaMinima">
+                                <option value="0" selected>Nenhuma</option>
+                                <option value="1">1 hora</option>
+                                <option value="2">2 horas</option>
+                                <option value="24">24 horas</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Serviços oferecidos -->
+                <div class="form-section">
+                    <h3>Serviços Oferecidos</h3>
+                    <p>Cadastre pelo menos um serviço para sua barbearia.</p>
+                    
+                    <div id="servicosContainerCadastro">
+                        <!-- Primeiro serviço (obrigatório) -->
+                        <div class="servico-cadastro">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Nome do Serviço *</label>
+                                    <input type="text" class="servico-nome" placeholder="Ex: Corte de Cabelo" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Duração (minutos) *</label>
+                                    <input type="number" class="servico-tempo" value="30" min="5" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Valor (R$) *</label>
+                                    <input type="number" class="servico-valor" placeholder="0.00" min="0" step="0.01" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="btnAddServico" class="btn-adicionar">
+                        <i class="fas fa-plus"></i> Adicionar Outro Serviço
+                    </button>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" id="btnVoltar" class="btn-voltar">Cancelar</button>
+                    <button type="submit" id="btnSalvarCadastro" class="btn-cadastrar">Salvar Cadastro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/cadastro.js"></script>
+</body>
+</html> 

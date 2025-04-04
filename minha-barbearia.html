@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarberShop - Minha Barbearia</title>
+    <!-- Fonte Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Menu lateral -->
+    <div class="sidebar" id="barbSidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#" id="barbInicio">Início</a>
+        <a href="#" id="barbMeusAgendamentos">Meus Agendamentos</a>
+        <a href="#" id="barbCadastro">Cadastro da Barbearia</a>
+        <a href="#" id="barbMinhaBarbearia">Minha Barbearia</a>
+    </div>
+
+    <!-- Botão para abrir o menu -->
+    <button class="openbtn" id="barbOpenBtn" onclick="openNav()">&#9776;</button>
+
+    <!-- Conteúdo principal -->
+    <div class="main-content">
+        <!-- Título do site -->
+        <div class="site-title">
+            <h1>BarberShop - Minha Barbearia</h1>
+            <p id="barbDataAtual"></p>
+        </div>
+
+        <div class="btn-voltar-container">
+            <a href="index.html" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+        </div>
+
+        <!-- Container de notificações -->
+        <div id="notificacaoContainer" class="notificacao-container">
+            <!-- Notificações dinâmicas serão adicionadas aqui -->
+        </div>
+
+        <!-- Menu de navegação das seções -->
+        <div class="barbearia-menu">
+            <button class="btn-menu-section active" data-section="agenda">
+                <i class="fas fa-calendar-alt"></i> Agenda
+            </button>
+            <button class="btn-menu-section" data-section="servicos">
+                <i class="fas fa-cut"></i> Serviços
+            </button>
+            <button class="btn-menu-section" data-section="expediente">
+                <i class="fas fa-clock"></i> Expediente
+            </button>
+            <button class="btn-menu-section" data-section="config">
+                <i class="fas fa-cog"></i> Configurações
+            </button>
+        </div>
+
+        <!-- Conteúdo da barbearia -->
+        <div class="barbearia-container">
+            <!-- Seção de Agenda -->
+            <div id="secaoAgenda" class="barbearia-section active">
+                <h2 class="barbearia-titulo">Agenda de Atendimentos</h2>
+                
+                <!-- Estatísticas do mês -->
+                <div class="estatisticas-mes">
+                    <div class="estatistica-card">
+                        <div class="estatistica-titulo">Total de Cortes no Mês</div>
+                        <div class="estatistica-valor" id="totalCortesMes">0</div>
+                    </div>
+                    <div class="estatistica-card">
+                        <div class="estatistica-titulo">Faturamento do Mês</div>
+                        <div class="estatistica-valor" id="faturamentoMes">R$ 0,00</div>
+                    </div>
+                </div>
+                
+                <!-- Navegação da agenda -->
+                <div class="agenda-navegacao">
+                    <h3 id="agendaData">Hoje</h3>
+                </div>
+
+                <!-- Container da agenda -->
+                <div class="agenda-container">
+                    <div id="semAgendamentos" class="agenda-vazia" style="display: none;">
+                        <p>Nenhum agendamento para este dia.</p>
+                    </div>
+
+                    <div class="agenda-lista-container">
+                        <ul id="listaAgendamentos" class="agenda-lista">
+                            <!-- Agendamentos serão listados aqui -->
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Calendário Mensal para visualização -->
+                <div class="calendario-mensal-wrapper">
+                    <div class="calendario-mensal">
+                        <div class="calendario-header">
+                            <button class="btn-nav" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                            <h3 id="currentMonth">Mês Atual</h3>
+                            <button class="btn-nav" id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="calendario-dias-semana">
+                            <div>Dom</div>
+                            <div>Seg</div>
+                            <div>Ter</div>
+                            <div>Qua</div>
+                            <div>Qui</div>
+                            <div>Sex</div>
+                            <div>Sáb</div>
+                        </div>
+                        <div class="calendario-dias" id="calendarDays">
+                            <!-- Os dias serão gerados via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulário para agendamento manual -->
+                <div class="agendamento-manual">
+                    <h3 class="agendamento-manual-titulo">Agendar Manualmente</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="agendaManualData">Data</label>
+                            <input type="date" id="agendaManualData">
+                        </div>
+                        <div class="form-group">
+                            <label for="agendaManualHora">Hora</label>
+                            <input type="time" id="agendaManualHora">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="agendaManualServico">Serviço</label>
+                            <select id="agendaManualServico">
+                                <!-- Opções de serviços serão carregadas dinamicamente -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="agendaManualTempo">Duração (min)</label>
+                            <input type="number" id="agendaManualTempo" min="15" step="5" value="30">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="agendaManualCliente">Nome do Cliente</label>
+                            <input type="text" id="agendaManualCliente" placeholder="Nome completo">
+                        </div>
+                        <div class="form-group">
+                            <label for="agendaManualTelefone">Telefone</label>
+                            <input type="tel" id="agendaManualTelefone" placeholder="(00) 00000-0000">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="agendaManualObs">Observações</label>
+                        <textarea id="agendaManualObs" placeholder="Observações adicionais"></textarea>
+                    </div>
+                    <div class="form-check agendamento-recorrente">
+                        <input type="checkbox" id="agendaMensal" class="checkbox-mensal">
+                        <label for="agendaMensal">Marcar este dia para todos os meses do ano?</label>
+                    </div>
+                    <div class="form-footer form-buttons-row">
+                        <button id="btnAgendarManual" class="btn-cadastrar">Adicionar Agendamento</button>
+                        <button id="btnApagarFuturos" class="btn-apagar-futuros">Apagar Agendamentos de Cliente</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seção de Serviços -->
+            <div id="secaoServicos" class="barbearia-section">
+                <h2 class="barbearia-titulo">Gerenciar Serviços</h2>
+                
+                <!-- Lista de serviços -->
+                <div id="listaServicosGerenciar" class="servicos-lista">
+                    <!-- Serviços serão listados aqui -->
+                </div>
+                
+                <!-- Formulário para adicionar novo serviço -->
+                <div class="servico-form">
+                    <h3>Adicionar Novo Serviço</h3>
+                    <div class="form-group">
+                        <label for="novoServicoNome">Nome do Serviço</label>
+                        <input type="text" id="novoServicoNome" placeholder="Ex: Corte de Cabelo, Barba, etc.">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="novoServicoTempo">Tempo (minutos)</label>
+                            <input type="number" id="novoServicoTempo" placeholder="Ex: 30" min="5" value="30">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="novoServicoValor">Valor (R$)</label>
+                            <input type="number" id="novoServicoValor" placeholder="Ex: 50.00" min="0" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <button id="btnAdicionarNovoServico" class="btn-cadastrar">Adicionar Serviço</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seção de Configurações -->
+            <div id="secaoConfig" class="barbearia-section">
+                <h2 class="barbearia-titulo">Configurações da Barbearia</h2>
+                
+                <div class="form-group">
+                    <label for="configNomeBarbearia">Nome da Barbearia</label>
+                    <input type="text" id="configNomeBarbearia">
+                </div>
+                
+                <div class="form-group">
+                    <label for="configNomeResponsavel">Nome do Responsável</label>
+                    <input type="text" id="configNomeResponsavel">
+                </div>
+                
+                <div class="form-group">
+                    <label for="configTelefone">Telefone</label>
+                    <input type="tel" id="configTelefone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="configEndereco">Endereço</label>
+                    <input type="text" id="configEndereco">
+                </div>
+                
+                <div class="form-group">
+                    <label for="configDescricao">Descrição</label>
+                    <textarea id="configDescricao"></textarea>
+                </div>
+                
+                <div class="form-footer">
+                    <button id="btnSalvarConfig" class="btn-cadastrar">Salvar Configurações</button>
+                </div>
+            </div>
+
+            <!-- Seção de Expediente -->
+            <div id="secaoExpediente" class="barbearia-section">
+                <h2 class="barbearia-titulo">Configurar Horário de Expediente</h2>
+                
+                <div class="expediente-form">
+                    <div class="dias-semana">
+                        <h3>Dias de Funcionamento</h3>
+                        <div class="form-checkboxes">
+                            <div class="form-check">
+                                <input type="checkbox" id="segunda" class="dia-semana" checked>
+                                <label for="segunda">Segunda-feira</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" id="terca" class="dia-semana" checked>
+                                <label for="terca">Terça-feira</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" id="quarta" class="dia-semana" checked>
+                                <label for="quarta">Quarta-feira</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" id="quinta" class="dia-semana" checked>
+                                <label for="quinta">Quinta-feira</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" id="sexta" class="dia-semana" checked>
+                                <label for="sexta">Sexta-feira</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" id="sabado" class="dia-semana" checked>
+                                <label for="sabado">Sábado</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" id="domingo" class="dia-semana">
+                                <label for="domingo">Domingo</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="horarios-expediente">
+                        <h3>Horários de Atendimento</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="horaInicio">Horário de Início</label>
+                                <input type="time" id="horaInicio" value="08:00">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="horaFim">Horário de Término</label>
+                                <input type="time" id="horaFim" value="18:00">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="intervaloAgendamento">Intervalo entre Agendamentos (minutos)</label>
+                            <input type="number" id="intervaloAgendamento" min="5" value="30" step="5">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="inicioAlmoco">Início do Intervalo de Almoço</label>
+                            <input type="time" id="inicioAlmoco" value="12:00">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fimAlmoco">Fim do Intervalo de Almoço</label>
+                            <input type="time" id="fimAlmoco" value="13:00">
+                        </div>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <button id="btnSalvarExpediente" class="btn-cadastrar">Salvar Horário de Expediente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/minha-barbearia.js"></script>
+</body>
+</html> 
